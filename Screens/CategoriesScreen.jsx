@@ -9,19 +9,17 @@ function renderCategoryItem({ item }) {
   return <CategoryGridTile title={item.title} color={item.color} />;
 }
 
-function CategotiesScreen() {
+function CategoriesScreen() {
   return (
-    <SafeAreaView>
-      <FlatList
-        data={CATEGORIES}
-        keyExtractor={(item) => item.id}
-        renderItem={renderCategoryItem}
-        numColumns={2}
-      />
-    </SafeAreaView>
+    <FlatList
+      data={CATEGORIES}
+      keyExtractor={(item) => item.id}
+      renderItem={renderCategoryItem}
+      numColumns={2}
+    />
   );
 }
 
 const styles = StyleSheet.create({});
 
-export default CategotiesScreen;
+export default CategoriesScreen;

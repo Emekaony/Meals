@@ -1,15 +1,24 @@
-import { SafeAreaView, StyleSheet, FlatList } from "react-native";
+import { StyleSheet, FlatList } from "react-native";
 
 import { CATEGORIES } from "../Data/dummy-data";
 import CategoryGridTile from "../Components/CategoryGridTile";
 
-// FlatList renderItem returns an itemDat object which has an item key
-// this item key is what is important to us. It is what contains the actual data object
-function renderCategoryItem({ item }) {
-  return <CategoryGridTile title={item.title} color={item.color} />;
-}
+const CategoriesScreen = ({ navigation }) => {
+  // I do not know of defining the render function inside the component is a good approach but it works for now
+  function renderCategoryItem({ item }) {
+    const pressHandler = () => {
+      navigation.navigate("Overview");
+    };
 
-function CategoriesScreen() {
+    return (
+      <CategoryGridTile
+        title={item.title}
+        color={item.color}
+        onPress={pressHandler}
+      />
+    );
+  }
+
   return (
     <FlatList
       data={CATEGORIES}
@@ -18,7 +27,7 @@ function CategoriesScreen() {
       numColumns={2}
     />
   );
-}
+};
 
 const styles = StyleSheet.create({});
 

@@ -1,7 +1,7 @@
 import { Pressable, View, StyleSheet, Text, Platform } from "react-native";
 
 // expect to get these props
-function CategoryGridTile({ title, color }) {
+const CategoryGridTile = ({ title, color, onPress }) => {
   return (
     <View style={styles.gridItem}>
       <Pressable
@@ -9,6 +9,7 @@ function CategoryGridTile({ title, color }) {
           styles.buttonStyle,
           pressed ? styles.buttonPressed : null,
         ]}
+        onPress={onPress}
       >
         <View style={{ ...styles.innerContainer, backgroundColor: color }}>
           <Text style={styles.title}>{title}</Text>
@@ -16,7 +17,7 @@ function CategoryGridTile({ title, color }) {
       </Pressable>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   gridItem: {

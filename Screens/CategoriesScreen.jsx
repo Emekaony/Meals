@@ -7,7 +7,9 @@ const CategoriesScreen = ({ navigation }) => {
   // I do not know of defining the render function inside the component is a good approach but it works for now
   function renderCategoryItem({ item }) {
     const pressHandler = () => {
-      navigation.navigate("Overview");
+      navigation.navigate("Overview", {
+        categoryId: item.id,
+      });
     };
 
     return (

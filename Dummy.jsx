@@ -1,7 +1,7 @@
 import { StyleSheet } from "react-native";
 
-function Dummy() {}
+const MealItem = () => {};
 
 const styles = StyleSheet.create({});
 
-export default Dummy;
+export default MealItem;

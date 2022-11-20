@@ -5,9 +5,10 @@ import CategoryGridTile from "../Components/CategoryGridTile";
 
 const CategoriesScreen = ({ navigation }) => {
   // I do not know of defining the render function inside the component is a good approach but it works for now
-  function renderCategoryItem({ item }) {
+  const renderCategoryItem = ({ item }) => {
     const pressHandler = () => {
-      navigation.navigate("Overview", {
+      // console.log(`sending over ${item.id}`);
+      navigation.navigate("OverviewScreen", {
         categoryId: item.id,
       });
     };
@@ -19,7 +20,7 @@ const CategoriesScreen = ({ navigation }) => {
         onPress={pressHandler}
       />
     );
-  }
+  };
 
   return (
     <FlatList

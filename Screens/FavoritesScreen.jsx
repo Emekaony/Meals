@@ -1,6 +1,8 @@
-import { StyleSheet } from "react-native";
+import { Text, StyleSheet } from "react-native";
 
-const FavoritesScreen = () => {};
+const FavoritesScreen = () => {
+  return <Text>This is the favorites screen</Text>;
+};
 
 const styles = StyleSheet.create({});
 

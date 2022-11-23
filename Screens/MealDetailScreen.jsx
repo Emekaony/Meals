@@ -11,7 +11,6 @@ import { FavoritesContext } from "../store/context/favorites-context";
 const MealDetailScreen = ({ route, navigation }) => {
   const mealId = route.params.id;
   const meal = MEALS.find((meal) => meal.id === mealId);
-  const mealName = meal.title;
 
   // context stuff
   const favoriteMealsCtx = useContext(FavoritesContext);

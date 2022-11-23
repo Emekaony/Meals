@@ -1,9 +1,9 @@
 import { useContext, useLayoutEffect } from "react";
-import { View, FlatList, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text } from "react-native";
 
 import { FavoritesContext } from "../store/context/favorites-context";
 import { MEALS } from "../Data/dummy-data";
-import MealItem from "../Components/MealItem";
+import MealCard from "../Components/MealCard";
 
 const FavoritesScreen = ({ navigation }) => {
   const favMealsCtx = useContext(FavoritesContext);
@@ -17,24 +17,6 @@ const FavoritesScreen = ({ navigation }) => {
     });
   }, [navigation]);
 
-  const renderMealItem = ({ item }) => {
-    const mealItemProps = {
-      imageUrl: item.imageUrl,
-      title: item.title,
-      affordability: item.affordability,
-      duration: item.duration,
-      complexity: item.complexity,
-    };
-
-    const pressHandler = () => {
-      navigation.navigate("DetailScreen", {
-        id: item.id,
-      });
-    };
-
-    return <MealItem {...mealItemProps} onPress={pressHandler} />;
-  };
-
   if (favoriteMeals.length === 0) {
     return (
       <View style={styles.noMeal}>
@@ -43,15 +25,7 @@ const FavoritesScreen = ({ navigation }) => {
     );
   }
 
-  return (
-    <View style={styles.container}>
-      <FlatList
-        data={favoriteMeals}
-        keyExtractor={(item) => item.id}
-        renderItem={renderMealItem}
-      />
-    </View>
-  );
+  return <MealCard mealsToDisplay={favoriteMeals} />;
 };
 
 const styles = StyleSheet.create({

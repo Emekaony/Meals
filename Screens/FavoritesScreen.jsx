@@ -1,5 +1,5 @@
 import { useContext, useLayoutEffect } from "react";
-import { View, FlatList, StyleSheet } from "react-native";
+import { View, FlatList, StyleSheet, Text } from "react-native";
 
 import { FavoritesContext } from "../store/context/favorites-context";
 import { MEALS } from "../Data/dummy-data";
@@ -35,6 +35,14 @@ const FavoritesScreen = ({ navigation }) => {
     return <MealItem {...mealItemProps} onPress={pressHandler} />;
   };
 
+  if (favoriteMeals.length === 0) {
+    return (
+      <View style={styles.noMeal}>
+        <Text style={styles.text}>No favorite meals yet</Text>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <FlatList
@@ -46,6 +54,17 @@ const FavoritesScreen = ({ navigation }) => {
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  noMeal: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  text: {
+    fontWeight: "bold",
+    fontSize: 24,
+    color: "white",
+  },
+});
 
 export default FavoritesScreen;

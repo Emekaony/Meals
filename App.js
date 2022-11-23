@@ -9,7 +9,9 @@ import CategoriesScreen from "./Screens/CategoriesScreen";
 import MealsOverviewScreen from "./Screens/MealsOverviewScreen";
 import MealDetailScreen from "./Screens/MealDetailScreen";
 import FavoritesScreen from "./Screens/FavoritesScreen";
-import FavoritesContextProvider from "./store/context/favorites-context";
+// import FavoritesContextProvider from "./store/context/favorites-context";
+import { Provider } from "react-redux";
+import { store } from "./store/redux/store";
 
 // this is an object
 const Stack = createNativeStackNavigator();
@@ -62,7 +64,8 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <FavoritesContextProvider>
+      {/* <FavoritesContextProvider> */}
+      <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator
             screenOptions={{
@@ -95,7 +98,8 @@ export default function App() {
             />
           </Stack.Navigator>
         </NavigationContainer>
-      </FavoritesContextProvider>
+        {/* </FavoritesContextProvider> */}
+      </Provider>
     </>
   );
 }

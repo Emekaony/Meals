@@ -1,14 +1,16 @@
-import { useContext, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
+import { useSelector } from "react-redux";
 import { View, StyleSheet, Text } from "react-native";
 
-import { FavoritesContext } from "../store/context/favorites-context";
+// import { FavoritesContext } from "../store/context/favorites-context";
 import { MEALS } from "../Data/dummy-data";
 import MealCard from "../Components/MealCard";
 
 const FavoritesScreen = ({ navigation }) => {
-  const favMealsCtx = useContext(FavoritesContext);
+  // const favMealsCtx = useContext(FavoritesContext);
+  const favoriteMealIds = useSelector((state) => state.favoriteMeals.ids);
   const favoriteMeals = MEALS.filter((meal) =>
-    favMealsCtx.ids.includes(meal.id)
+    favoriteMealIds.includes(meal.id)
   );
 
   useLayoutEffect(() => {

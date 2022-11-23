@@ -1,4 +1,4 @@
-import { useLayoutEffect, useState } from "react";
+import { useLayoutEffect, useContext } from "react";
 import { Text, StyleSheet, Image, ScrollView, View } from "react-native";
 import MealDetails from "../Components/MealDetails";
 import { Ionicons } from "@expo/vector-icons";
@@ -6,28 +6,45 @@ import { Ionicons } from "@expo/vector-icons";
 import { MEALS } from "../Data/dummy-data";
 import Subtitle from "../Components/MealDetail/Subtitle";
 import List from "../Components/MealDetail/List";
+import { FavoritesContext } from "../store/context/favorites-context";
 
 const MealDetailScreen = ({ route, navigation }) => {
   const mealId = route.params.id;
   const meal = MEALS.find((meal) => meal.id === mealId);
-  const [iconPressed, setIconPressed] = useState(false);
+  const mealName = meal.title;
 
-  const headerButtonPressedHandler = () => {
-    setIconPressed((currValue) => !currValue);
+  // context stuff
+  const favoriteMealsCtx = useContext(FavoritesContext);
+
+  // check if the meal is part of the favorites
+  const mealIsFavorite = favoriteMealsCtx.ids.includes(mealId);
+
+  const changeFavoritesStatusHandler = () => {
+    /*
+    When the user taps the star, if the meal is a favorite, unfavorite it
+    else, make it a favorite meal
+    */
+    if (mealIsFavorite) {
+      console.log(`Just made ${mealName} a non-favorite meal`);
+      favoriteMealsCtx.removeFavorite(mealId);
+    } else {
+      console.log(`Just made ${mealName} a favorite meal`);
+      favoriteMealsCtx.addFavorite(mealId);
+    }
   };
 
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <Ionicons
-          name={iconPressed ? "star" : "star-outline"}
+          name={mealIsFavorite ? "star" : "star-outline"}
           size={24}
           color="white"
-          onPress={headerButtonPressedHandler}
+          onPress={changeFavoritesStatusHandler}
         />
       ),
     });
-  }, [navigation, headerButtonPressedHandler, iconPressed]);
+  }, [navigation, changeFavoritesStatusHandler, mealIsFavorite]);
 
   return (
     <ScrollView style={styles.container}>

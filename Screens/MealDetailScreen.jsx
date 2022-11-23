@@ -25,10 +25,8 @@ const MealDetailScreen = ({ route, navigation }) => {
     else, make it a favorite meal
     */
     if (mealIsFavorite) {
-      console.log(`Just made ${mealName} a non-favorite meal`);
       favoriteMealsCtx.removeFavorite(mealId);
     } else {
-      console.log(`Just made ${mealName} a favorite meal`);
       favoriteMealsCtx.addFavorite(mealId);
     }
   };
